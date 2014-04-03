@@ -7,10 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "gulp",
+    "gulpplugin",
     "git",
     "package.json"
   ],
+  "repository" :
+  { 
+    "type" : "git", 
+    "url" : "http://github.com/ikari-pl/gulp-tag-version.git"
+  },
   "author": "Cezar \"ikari\" Pokorski <git@ikari.pl>",
   "license": "BSD-2-Clause",
   "dependencies": {
