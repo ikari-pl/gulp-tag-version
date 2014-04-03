@@ -11,14 +11,14 @@ module.exports = function(opts) {
   function modifyContents(file, cb) {
 
     if(file.isNull()) return cb(null, file);
-    if(file.isStream()) return cb(new Error('gulp-vtag: streams not supported'));
+    if(file.isStream()) return cb(new Error('gulp-tag-version: streams not supported'));
 
     var json = JSON.parse(file.contents.toString()),
       currVer =  json[opts.key],
       tag = opts.prefix+currVer;
     gutil.log('Tagging as: '+gutil.colors.cyan('v'+json[opts.key]));
     git.tag(currVer, 'tagging as '+currVer);
-    if (opts.push) git.push();
+    if (opts.push) git.push('origin', 'master', { args: '--tags' });
     cb(null, file);
   }
 
