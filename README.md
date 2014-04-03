@@ -1,7 +1,9 @@
 gulp-tag-version
 ================
 
-Tag git repository with current package version (gulp plugin)
+Tag git repository with current package version (gulp plugin).
+
+It will read the `version` attribute (by default, override with `key` option) from the JSON stream (probably your `package.json` or `bower.json`), prefixes it with `"v"` (override with `prefix` option), tags the repository with such created tagname (e.g. `v1.2.3`) and pushes (overrite with `push: false	`) to upstream.
 
 Example gulpfile
 ----------------
@@ -27,3 +29,10 @@ gulp.task('big-release', function() {
         .pipe(tag_version({ push: true }));
 });
 ```
+
+Thanks :beer:
+--------
+
+* Steve Lacy (http://slacy.me) for creating [`gulp-bump`](https://github.com/stevelacy/gulp-bump) and [`gulp-git`](https://github.com/stevelacy/gulp-git) used here
+* The main file structure is based on `gulp-bump` a bit as well (this is my first plugin :))
+
