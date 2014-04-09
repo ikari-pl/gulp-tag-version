@@ -11,10 +11,9 @@
     "git",
     "package.json"
   ],
-  "repository" :
-  { 
-    "type" : "git", 
-    "url" : "http://github.com/ikari-pl/gulp-tag-version.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/ikari-pl/gulp-tag-version.git"
   },
   "author": "Cezar \"ikari\" Pokorski <git@ikari.pl>",
   "license": "BSD-2-Clause",
@@ -22,5 +21,11 @@
     "map-stream": "~0.1.0",
     "gulp-util": "~2.2.14",
     "gulp-git": "~0.3.6"
+  },
+  "devDependencies": {
+    "gulp-bump": "~0.1.7",
+    "gulp-filter": "~0.4.0",
+    "gulp-prompt": "~0.1.1",
+    "gulp": "~3.6.0"
   }
 }
