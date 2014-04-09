@@ -14,10 +14,9 @@ module.exports = function(opts) {
     if(file.isStream()) return cb(new Error('gulp-tag-version: streams not supported'));
 
     var json = JSON.parse(file.contents.toString()),
-      currVer =  json[opts.key],
-      tag = opts.prefix+currVer;
+      tag = opts.prefix+json[opts.key];
     gutil.log('Tagging as: '+gutil.colors.cyan(tag));
-    git.tag(currVer, 'tagging as '+tag);
+    git.tag(tag, 'tagging as '+tag);
     if (opts.push) git.push('origin', 'master', { args: '--tags' });
     cb(null, file);
   }
