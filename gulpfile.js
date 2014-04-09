@@ -15,7 +15,7 @@ var paths = {
     versionToBump : ['./package.json'],
     versionToCheck: 'package.json',
     dest          : './'
-};
+}
 
 /**
  * Bumping version number.
@@ -43,9 +43,9 @@ function inc(importance, cake_mustnt_be_a_lie) {
         .pipe(git.commit('bumps package version')) // commit the changed version number
         .pipe(filter(paths.versionToCheck)) // read only one file to get the version number
         .pipe(tag_version()) // tag it in the repository 
-        .pipe(git.push('origin', 'master', { args: '--tags' })); // push the tags to master
+        //.pipe(git.push('origin', 'master', { args: '--tags' })) // push the tags to master
 }
 
-gulp.task('patch', function() { return inc('patch'); });
-gulp.task('feature', function() { return inc('minor'); });
-gulp.task('release', function() { return inc('major', true); });
+gulp.task('patch', function() { return inc('patch'); })
+gulp.task('feature', function() { return inc('minor'); })
+gulp.task('release', function() { return inc('major', true); })
