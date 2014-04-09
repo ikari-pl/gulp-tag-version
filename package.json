@@ -26,6 +26,7 @@
     "gulp-bump": "~0.1.7",
     "gulp-filter": "~0.4.0",
     "gulp-prompt": "~0.1.1",
-    "gulp": "~3.6.0"
+    "gulp": "~3.6.0",
+    "gulp-git": "~0.3.6"
   }
 }

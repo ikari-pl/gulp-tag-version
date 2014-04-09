@@ -3,6 +3,7 @@
 
 // dependencies
 var gulp = require('gulp'),
+	git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
     prompt = require('gulp-prompt'),
@@ -31,16 +32,18 @@ var paths = {
  */
 
 function inc(importance, cake_mustnt_be_a_lie) {
-    var process = gulp.src(paths.versionToBump)
+    var process = gulp.src(paths.versionToBump) // get all the files to bump version in
     	.pipe(prompt.confirm('Have you commited all the changes to be included by this version?'));
     if (cake_mustnt_be_a_lie === true) {
         /* never ever do a big release without proper celebration, it's a company Hoshin thing */
         process.pipe(prompt.confirm('Has cake been served to celebrate the release?'));
     }
-    process.pipe(bump({type: importance}))
-        .pipe(gulp.dest(paths.dest))
-        .pipe(filter(paths.versionToCheck))
-        .pipe(tag_version());
+    process.pipe(bump({type: importance})) // bump the version number in those files
+        .pipe(gulp.dest(paths.dest))  // save it back to filesystem
+        .pipe(git.commit('bumps package version')) // commit the changed version number
+        .pipe(filter(paths.versionToCheck)) // read only one file to get the version number
+        .pipe(tag_version()) // tag it in the repository 
+        .pipe(git.push('origin', 'master', { args: '--tags' })); // push the tags to master
 }
 
 gulp.task('patch', function() { return inc('patch'); });
