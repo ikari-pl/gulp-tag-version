@@ -31,7 +31,8 @@ var paths = {
  */
 
 function inc(importance, cake_mustnt_be_a_lie) {
-    var process = gulp.src(paths.versionToBump);
+    var process = gulp.src(paths.versionToBump)
+    	.pipe(prompt.confirm('Have you commited all the changes to be included by this version?'));
     if (cake_mustnt_be_a_lie === true) {
         /* never ever do a big release without proper celebration, it's a company Hoshin thing */
         process.pipe(prompt.confirm('Has cake been served to celebrate the release?'));
