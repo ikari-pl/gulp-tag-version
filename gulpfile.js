@@ -22,9 +22,9 @@ var paths = {
  *
  * You can use the commands
  *
- *     gulp patch     # makes 0.1.0 → 0.1.1
- *     gulp feature   # makes 0.1.1 → 0.2.0
- *     gulp release   # makes 0.2.1 → 1.0.0
+ *     gulp patch     # makes v0.1.0 → v0.1.1
+ *     gulp feature   # makes v0.1.1 → v0.2.0
+ *     gulp release   # makes v0.2.1 → v1.0.0
  *
  * To bump the version numbers accordingly after you did a patch,
  * introduced a feature or made a backwards-incompatible release.
