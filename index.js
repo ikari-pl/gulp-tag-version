@@ -16,8 +16,8 @@ module.exports = function(opts) {
     var json = JSON.parse(file.contents.toString()),
       currVer =  json[opts.key],
       tag = opts.prefix+currVer;
-    gutil.log('Tagging as: '+gutil.colors.cyan('v'+json[opts.key]));
-    git.tag(currVer, 'tagging as '+currVer);
+    gutil.log('Tagging as: '+gutil.colors.cyan(tag));
+    git.tag(currVer, 'tagging as '+tag);
     if (opts.push) git.push('origin', 'master', { args: '--tags' });
     cb(null, file);
   }
