@@ -6,29 +6,20 @@ Tag git repository with current package version (gulp plugin).
 It will read the `version` attribute (by default, override with `key` option) from the JSON stream (probably your `package.json` or `bower.json`), prefixes it with `"v"` (override with `prefix` option) and tags the repository with such created tagname (e.g. `v1.2.3`).
 
 
-Example gulpfile (actually this package uses it)
-------------------------------------------------
+Example gulpfile
+----------------
 
 ```js
 
 // dependencies
 var gulp = require('gulp'),
-	git = require('gulp-git'),
+    git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
-    prompt = require('gulp-prompt'),
     tag_version = require('gulp-tag-version');
 
-// config
-var paths = {
-    scripts       : ['src/*.js'],
-    versionToBump : ['./package.json'],
-    versionToCheck: 'package.json',
-    dest          : './'
-}
-
 /**
- * Bumping version number.
+ * Bumping version number and tagging the repository with it.
  * Please read http://semver.org/
  *
  * You can use the commands
@@ -41,24 +32,25 @@ var paths = {
  * introduced a feature or made a backwards-incompatible release.
  */
 
-function inc(importance, cake_mustnt_be_a_lie) {
-    var process = gulp.src(paths.versionToBump) // get all the files to bump version in
-    	.pipe(prompt.confirm('Have you commited all the changes to be included by this version?'));
-    if (cake_mustnt_be_a_lie === true) {
-        /* never ever do a big release without proper celebration, it's a company Hoshin thing */
-        process.pipe(prompt.confirm('Has cake been served to celebrate the release?'));
-    }
-    process.pipe(bump({type: importance})) // bump the version number in those files
-        .pipe(gulp.dest(paths.dest))  // save it back to filesystem
-        .pipe(git.commit('bumps package version')) // commit the changed version number
-        .pipe(filter(paths.versionToCheck)) // read only one file to get the version number
-        .pipe(tag_version()) // tag it in the repository 
-        //.pipe(git.push('origin', 'master', { args: '--tags' })) // push the tags to master
+function inc(importance) {
+    // get all the files to bump version in
+    return gulp.src(['./package.json', './bower.json']) 
+        // bump the version number in those files
+        .pipe(bump({type: importance}))
+        // save it back to filesystem
+        .pipe(gulp.dest('./'))
+        // commit the changed version number
+        .pipe(git.commit('bumps package version')) 
+
+        // read only one file to get the version number
+        .pipe(filter('package.json')) 
+        // **tag it in the repository**
+        .pipe(tag_version()) 
 }
 
 gulp.task('patch', function() { return inc('patch'); })
 gulp.task('feature', function() { return inc('minor'); })
-gulp.task('release', function() { return inc('major', true); })
+gulp.task('release', function() { return inc('major'); })
 ```
 
 Thanks :beer:
