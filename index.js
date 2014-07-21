@@ -5,7 +5,7 @@ var map = require('map-stream'),
 module.exports = function(opts) {
   if(!opts) opts = {}
   if(!opts.key) opts.key = 'version'
-  if(!opts.prefix) opts.prefix = 'v'
+  if(typeof opts.prefix === 'undefined') opts.prefix = 'v'
   if(typeof opts.push === 'undefined') opts.push = true
 
   function modifyContents(file, cb) {
