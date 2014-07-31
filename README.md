@@ -59,4 +59,4 @@ Thanks :beer:
 * to guys and gals from Fractal for [Gulp](http://gulpjs.com/) itself, obviously 
 * to Steve Lacy (http://slacy.me) for creating [`gulp-bump`](https://github.com/stevelacy/gulp-bump) and [`gulp-git`](https://github.com/stevelacy/gulp-git) used here
 * The main file structure is based on `gulp-bump` a bit as well (this is my first plugin :))
-
+* To [@pacemkr](https://github.com/pacemkr) for the first pull request I ever got (supporting empty prefix)
