@@ -53,6 +53,23 @@ gulp.task('feature', function() { return inc('minor'); })
 gulp.task('release', function() { return inc('major'); })
 ```
 
+Other features/remarks
+----------------------
+
+* If you need any special tagging options to be passed down to `git.tag`, just add it to the `tag_version` options. For example:
+```js
+gulp.task('bump_submodule', function(){
+    return gulp.src('./bower.json',  { cwd: './dist' })
+        .pipe(bump({type: 'patch'}))
+        .pipe(gulp.dest('./',{ cwd: './dist' }))
+        .pipe(git.commit('bumps package version',{cwd: './dist'}))
+        .pipe(filter('bower.json'))
+        .pipe(tag_version({cwd: './dist'}));
+});
+```
+
+
+
 Thanks :beer:
 --------
 
@@ -60,3 +77,4 @@ Thanks :beer:
 * to Steve Lacy (http://slacy.me) for creating [`gulp-bump`](https://github.com/stevelacy/gulp-bump) and [`gulp-git`](https://github.com/stevelacy/gulp-git) used here
 * The main file structure is based on `gulp-bump` a bit as well (this is my first plugin :))
 * To [@pacemkr](https://github.com/pacemkr) for the first pull request I ever got (supporting empty prefix)
+* To [@lapanoid](https://github.com/lapanoid) for passing `opts` down to `git.tag`
