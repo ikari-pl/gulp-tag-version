@@ -34,18 +34,18 @@ var gulp = require('gulp'),
 
 function inc(importance) {
     // get all the files to bump version in
-    return gulp.src(['./package.json', './bower.json']) 
+    return gulp.src(['./package.json', './bower.json'])
         // bump the version number in those files
         .pipe(bump({type: importance}))
         // save it back to filesystem
         .pipe(gulp.dest('./'))
         // commit the changed version number
-        .pipe(git.commit('bumps package version')) 
+        .pipe(git.commit('bumps package version'))
 
         // read only one file to get the version number
-        .pipe(filter('package.json')) 
+        .pipe(filter('package.json'))
         // **tag it in the repository**
-        .pipe(tag_version()) 
+        .pipe(tag_version());
 }
 
 gulp.task('patch', function() { return inc('patch'); })
@@ -73,7 +73,7 @@ gulp.task('bump_submodule', function(){
 Thanks :beer:
 --------
 
-* to guys and gals from Fractal for [Gulp](http://gulpjs.com/) itself, obviously 
+* to guys and gals from Fractal for [Gulp](http://gulpjs.com/) itself, obviously
 * to Steve Lacy (http://slacy.me) for creating [`gulp-bump`](https://github.com/stevelacy/gulp-bump) and [`gulp-git`](https://github.com/stevelacy/gulp-git) used here
 * The main file structure is based on `gulp-bump` a bit as well (this is my first plugin :))
 * To [@pacemkr](https://github.com/pacemkr) for the first pull request I ever got (supporting empty prefix)
