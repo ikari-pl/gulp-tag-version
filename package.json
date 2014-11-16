@@ -1,6 +1,6 @@
 {
   "name": "gulp-tag-version",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Tag git repository with current package version",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,10 @@
   "author": "Cezar \"ikari\" Pokorski <git@ikari.pl>",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "map-stream": "~0.1.0",
+    "gift": "^0.4.3-1",
+    "gulp-git": "~0.3.6",
     "gulp-util": "~2.2.14",
-    "gulp-git": "~0.3.6"
+    "map-stream": "~0.1.0"
   },
   "devDependencies": {
     "gulp-bump": "~0.1.7",
