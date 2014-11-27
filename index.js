@@ -25,7 +25,7 @@ module.exports = function(opts) {
       var json = JSON.parse(file.contents.toString());
       version = json[opts.key]
     }
-  	tag = opts.prefix+version
+    tag = opts.prefix+version
     gutil.log('Tagging as: '+gutil.colors.cyan(tag))
     git.tag(tag, 'tagging as '+tag, opts)
     cb(null, file)

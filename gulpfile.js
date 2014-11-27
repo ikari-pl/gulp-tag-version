@@ -3,7 +3,7 @@
 
 // dependencies
 var gulp = require('gulp'),
-	git = require('gulp-git'),
+    git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
     prompt = require('gulp-prompt'),
