@@ -1,6 +1,6 @@
 {
   "name": "gulp-tag-version",
-  "version": "1.2.3",
+  "version": "1.2.0",
   "description": "Tag git repository with current package version",
   "main": "index.js",
   "scripts": {
