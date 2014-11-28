@@ -21,8 +21,8 @@ module.exports = function(opts) {
       tag;
 
     if (!opts.version) {
-      if (file.isNull()) return callback(null, file);
-      if (file.isStream()) return callback(new Error('gulp-tag-version: streams not supported'));
+      if (file.isNull()) callback(null, file);
+      if (file.isStream()) callback(new Error('gulp-tag-version: streams not supported'));
 
       var json = JSON.parse(file.contents.toString());
       version = json[opts.key];
