@@ -8,6 +8,7 @@ var map = require('map-stream'),
  * @param opts.prefix {string?} Prefix prepended to version when creating tag name, defaults to 'v'
  * @param opts.push {boolean?} Push tags tagging? Default: true
  * @param opts.version {string?} Alternatively, just pass the version string here. Default: undefined.
+ * @param opts.gitOptions {object?} Optional git.tag command options
  */
 module.exports = function(opts) {
   if (!opts) opts = {};
@@ -39,7 +40,7 @@ module.exports = function(opts) {
 
       // If it does not exist, we can tag safely.
       if (tagNames.indexOf(tag) < 0) {
-        repo.create_tag(tag, opts, function(err) {
+        repo.create_tag(tag, opts.gitOptions || {}, function(err) {
           callback(err, file);
         });
       } else {
