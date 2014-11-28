@@ -43,7 +43,7 @@ module.exports = function(opts) {
           callback(err, file);
         });
       } else {
-        // Revert the "bump" commit because the command would fail.
+        // Something bad and unexpected happened!
         gutil.log("Tag " + gutil.colors.cyan(tag) + " already exists!");
         callback(new Error("Tag '" + tag + "' already exists!"))
       }
