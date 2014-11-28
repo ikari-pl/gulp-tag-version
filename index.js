@@ -1,8 +1,6 @@
 var map = require('map-stream'),
   gutil = require('gulp-util'),
-  git = require('gulp-git'),
   gift = require('gift');
-
 
 /**
  * @param opts {object} Module options, passed _also_ to underlying `git.tag`
@@ -17,21 +15,20 @@ module.exports = function(opts) {
   if(typeof opts.prefix === 'undefined') opts.prefix = 'v'
   if(typeof opts.push === 'undefined') opts.push = true
 
-  function modifyContents(file, cb) {
-    var version = opts.version // OK if undefined at this time
+  function tagItInGit(file, callback) {
+    var version = opts.version, // OK if undefined at this time
+      repo = gift(opts.cwd || process.env.PWD),
+      tag;
+
     if(!opts.version) {
-      if(file.isNull()) return cb(null, file)
-      if(file.isStream()) return cb(new Error('gulp-tag-version: streams not supported'))
+      if(file.isNull()) return callback(null, file)
+      if(file.isStream()) return callback(new Error('gulp-tag-version: streams not supported'))
 
       var json = JSON.parse(file.contents.toString());
       version = json[opts.key]
     }
     tag = opts.prefix+version
     gutil.log('Tagging as: '+gutil.colors.cyan(tag))
-
-    // gift is a full-fledge git plugin
-    var APP_DIR = process.env.PWD;
-    var repo = gift(APP_DIR);
 
     // Retrieve all the existing tags
     repo.tags(function(err, tags) {
@@ -42,22 +39,17 @@ module.exports = function(opts) {
 
       // If it does not exist, we can tag safely.
       if (tagNames.indexOf(tag) < 0) {
-        git.tag(tag, 'tagging as '+tag, opts);
-
+        repo.create_tag(tag, opts, function (err) {
+          callback(err, file);
+        });
       } else {
         // Revert the "bump" commit because the command would fail.
-        gutil.log("Tag " + gutil.colors.cyan(tag) + " exists! Revering commit...");
-        repo.reset("HEAD^", function(err) {
-          if (err) {
-            return cb(new Error(err));
-          }
-        });
+        gutil.log("Tag " + gutil.colors.cyan(tag) + " already exists!");
+        callback(new Error("Tag '" + tag + "' already exists!"))
       }
     });
-
-    cb(null, file)
   }
 
 
-  return map(modifyContents)
+  return map(tagItInGit)
 };
