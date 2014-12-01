@@ -70,7 +70,8 @@ gulp.task('release', function() { return inc('major'); })
 Other features/remarks
 ----------------------
 
-* If you need any special tagging options to be passed down to `git.tag`, just add it to the `tag_version` options. For example:
+* If you need any special tagging options to be passed down to `gift.create_tag`, just pass them in a `gitOptions` field. 
+For example:
 ```js
 gulp.task('bump_submodule', function(){
     return gulp.src('./bower.json',  { cwd: './dist' })
@@ -78,7 +79,7 @@ gulp.task('bump_submodule', function(){
         .pipe(gulp.dest('./',{ cwd: './dist' }))
         .pipe(git.commit('bumps package version',{cwd: './dist'}))
         .pipe(filter('bower.json'))
-        .pipe(tag_version({cwd: './dist'}));
+        .pipe(tag_version({ gitOptions: { file: './commit_message_file' }}));
 });
 ```
 
