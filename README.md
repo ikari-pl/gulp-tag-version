@@ -98,3 +98,4 @@ Thanks :beer:
 * To [@pacemkr](https://github.com/pacemkr) for the first pull request I ever got (supporting empty prefix)
 * To [@lapanoid](https://github.com/lapanoid) for passing `opts` down to `git.tag`
 * To [@brianmhunt](https://github.com/brianmhunt) for suggesting the `version` parameter
+* To [@adambuczynski](https://github.com/adambuczynski) for option to customize tag label
