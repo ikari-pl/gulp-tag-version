@@ -1,6 +1,10 @@
 gulp-tag-version
 ================
 
+[![npm](https://img.shields.io/npm/v/gulp-tag-version.svg?maxAge=2592000&style=flat-square)]()
+[![npm](https://img.shields.io/npm/dt/gulp-tag-version.svg?maxAge=2592000&style=flat-square)]()
+[![npm](https://img.shields.io/npm/dm/gulp-tag-version.svg?maxAge=2592000&style=flat-square)]()
+
 Tag git repository with current package version (gulp plugin).
 
 It will read the `version` attribute (by default, override with `key` option) from the JSON stream (probably your `package.json` or `bower.json`), prefixes it with `"v"` (override with `prefix` option) and _tags_ the repository (effectively issues the `git tag <tagname>` command) with such created tagname (e.g. `v1.2.3`).
