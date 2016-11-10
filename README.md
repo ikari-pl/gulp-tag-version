@@ -14,12 +14,12 @@ Simple example gulpfile
 -----------------------
 ```js
 var gulp = require('gulp'),
-    tag_version = require('gulp-tag-version');
+    tagVersion = require('gulp-tag-version');
 
 // Assuming there's "version: 1.2.3" in package.json,
 // tag the last commit as "v1.2.3"
 gulp.task('tag', function() {
-  return gulp.src(['./package.json']).pipe(tag_version());
+  return gulp.src(['./package.json']).pipe(tagVersion());
 });
 ```
 
@@ -34,7 +34,7 @@ var gulp = require('gulp'),
     git = require('gulp-git'),
     bump = require('gulp-bump'),
     filter = require('gulp-filter'),
-    tag_version = require('gulp-tag-version');
+    tagVersion = require('gulp-tag-version');
 
 /**
  * Bumping version number and tagging the repository with it.
@@ -63,7 +63,7 @@ function inc(importance) {
         // read only one file to get the version number
         .pipe(filter('package.json'))
         // **tag it in the repository**
-        .pipe(tag_version());
+        .pipe(tagVersion());
 }
 
 gulp.task('patch', function() { return inc('patch'); })
@@ -74,7 +74,7 @@ gulp.task('release', function() { return inc('major'); })
 Other features/remarks
 ----------------------
 
-* If you need any special tagging options to be passed down to `git.tag`, just add it to the `tag_version` options. For example:
+* If you need any special tagging options to be passed down to `git.tag`, just add it to the `tagVersion` options. For example:
 ```js
 gulp.task('bump_submodule', function(){
     return gulp.src('./bower.json',  { cwd: './dist' })
@@ -82,7 +82,7 @@ gulp.task('bump_submodule', function(){
         .pipe(gulp.dest('./',{ cwd: './dist' }))
         .pipe(git.commit('bumps package version',{cwd: './dist'}))
         .pipe(filter('bower.json'))
-        .pipe(tag_version({cwd: './dist'}));
+        .pipe(tagVersion({cwd: './dist'}));
 });
 ```
 
@@ -90,7 +90,7 @@ gulp.task('bump_submodule', function(){
 ```js*
 return gulp.src ...
   ...
-  .pipe(tag_version({version: '1.2.3'}));
+  .pipe(tagVersion({version: '1.2.3'}));
 ```
 
 Thanks :beer:
