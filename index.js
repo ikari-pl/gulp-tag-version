@@ -1,5 +1,6 @@
 var map = require('map-stream'),
-  gutil = require('gulp-util'),
+  log = require('fancy-log'),
+  colors = require('ansi-colors'),
   git = require('gulp-git')
 
 /**
@@ -28,7 +29,7 @@ module.exports = function(opts) {
     }
     var tag = opts.prefix+version
     var label = opts.label.replace('%t', tag)
-    gutil.log('Tagging as: '+gutil.colors.cyan(tag))
+    log('Tagging as: '+colors.cyan(tag))
     git.tag(tag, label, opts, cb)
   }
 
